@@ -48,6 +48,7 @@ jobs:
 
   # separate job inside the same workflow (works for other branches than default/master)
   test:
+    needs: build
     runs-on: ubuntu-18.04
 
     steps:
