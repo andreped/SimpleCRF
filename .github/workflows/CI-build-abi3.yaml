@@ -39,6 +39,13 @@ jobs:
     - name: Test maxflow demo
       run: cd ${{github.workspace}}/examples && python demo_maxflow.py 0
 
+    - name: Upload Python wheel
+      uses: actions/upload-artifact@v2
+      with:
+        name: Python wheel
+        path: ${{github.workspace}}/dist/SimpleCRF-*.whl
+        if-no-files-found: error
+
     # @TODO: not sure if this is allowed/possible. It is also ugly, but
     #  lets do this for now just for testing/debugging
     - uses: actions/checkout@v1
@@ -46,18 +53,3 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.7
-
-    - name: Install using abi3-compatible wheel
-      run: |
-        ls -la
-        ls ${{github.workspace}}/dist/
-        pip install --find-links=${{github.workspace}}/dist/ SimpleCRF
-
-    - name: Test import
-      run: python -c "import denseCRF, maxflow"
-
-    - name: Install deps for demos
-      run: pip install SimpleITK pillow matplotlib
-
-    - name: Test maxflow demo
-      run: cd ${{github.workspace}}/examples && python demo_maxflow.py 0
