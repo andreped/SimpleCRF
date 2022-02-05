@@ -66,8 +66,7 @@ jobs:
     - name: Install using abi3-compatible wheel
       run: |
         ls -la
-        ls ${{github.workspace}}/dist/
-        pip install --find-links=${{github.workspace}}/dist/ SimpleCRF
+        pip install --find-links=${{github.workspace}} SimpleCRF
 
     - name: Test import
       run: python -c "import denseCRF, maxflow"
