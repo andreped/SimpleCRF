@@ -3,8 +3,9 @@ name: test wheel (abi3)
 # Only trigger, when the build workflow succeeded
 on:
   workflow_run:
-    workflows: 
-      - "Build and upload wheel (abi3)"
+    workflows: ["Build and upload wheel (abi3)"]
+    branches: 
+      - '*'
     types:
       - completed
 
