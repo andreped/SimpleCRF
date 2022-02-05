@@ -51,22 +51,30 @@ jobs:
     needs: build
     runs-on: ubuntu-18.04
 
-    steps:
-    - uses: actions/download-artifact@master
-      with:
-        name: "Python wheel"
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
 
+    steps:
     # @TODO: not sure if this is allowed/possible. It is also ugly, but
     #  lets do this for now just for testing/debugging
-    - name: Set up Python 3.7
+    - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
-        python-version: 3.7
+        python-version: ${{ matrix.python-version }}
+
+    - name: Download artifact
+      uses: actions/download-artifact@master
+      with:
+        name: "Python wheel"
 
     - name: Install using abi3-compatible wheel
       run: |
         ls -la
         pip install --find-links=${{github.workspace}} SimpleCRF
+
+    - name: Install numpy dependency
+      run: pip install numpy
 
     - name: Test import
       run: python -c "import denseCRF, maxflow"
