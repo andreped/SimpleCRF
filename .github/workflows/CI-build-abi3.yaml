@@ -45,3 +45,35 @@ jobs:
         name: Python wheel
         path: ${{github.workspace}}/dist/SimpleCRF-*.whl
         if-no-files-found: error
+
+  # separate job inside the same workflow (works for other branches than default/master)
+  test:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: git branch
+
+    # @TODO: not sure if this is allowed/possible. It is also ugly, but
+    #  lets do this for now just for testing/debugging
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Install using abi3-compatible wheel
+      run: |
+        ls -la
+        ls ${{github.workspace}}/dist/
+        pip install --find-links=${{github.workspace}}/dist/ SimpleCRF
+
+    - name: Test import
+      run: python -c "import denseCRF, maxflow"
+
+    - name: Install deps for demos
+      run: pip install SimpleITK pillow matplotlib
+
+    - name: Test maxflow demo
+      run: cd ${{github.workspace}}/examples && python demo_maxflow.py 0
