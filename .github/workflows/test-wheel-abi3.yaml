@@ -3,16 +3,15 @@ name: test wheel (abi3)
 # Only trigger, when the build workflow succeeded
 on:
   workflow_run:
-    workflows: ["Build and upload wheel (abi3)"]
+    workflows: ["build"]
     types:
       - completed
 
 jobs:
-  notify:
+  test:
     runs-on: ubuntu-18.04
 
     steps:
-
     # @TODO: not sure if this is allowed/possible. It is also ugly, but
     #  lets do this for now just for testing/debugging
     - name: Set up Python 3.7
