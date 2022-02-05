@@ -1,0 +1,63 @@
+name: Build and upload wheel (abi3)
+
+on:
+  push:
+    branches: 
+      - '*'
+  pull_request:
+    branches: 
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+
+    - name: Install dependencies
+      run: |
+        pip install wheel setuptools
+        pip install -r requirements.txt
+
+    - name: Build wheel
+      run: python setup.py bdist_wheel
+
+    - name: Install software
+      run: pip install --find-links=${{github.workspace}}/dist/ SimpleCRF
+
+    - name: Test import
+      run: python -c "import denseCRF, maxflow"
+
+    - name: Install deps for demos
+      run: pip install SimpleITK pillow matplotlib
+
+    - name: Test maxflow demo
+      run: cd ${{github.workspace}}/examples && python demo_maxflow.py 0
+
+    # @TODO: not sure if this is allowed/possible. It is also ugly, but
+    #  lets do this for now just for testing/debugging
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Install using abi3-compatible wheel
+      run: pip install --find-links=${{github.workspace}}/dist/ SimpleCRF
+
+    - name: Install software
+      run: pip install --find-links=${{github.workspace}}/dist/ SimpleCRF
+
+    - name: Test import
+      run: python -c "import denseCRF, maxflow"
+
+    - name: Install deps for demos
+      run: pip install SimpleITK pillow matplotlib
+
+    - name: Test maxflow demo
+      run: cd ${{github.workspace}}/examples && python demo_maxflow.py 0

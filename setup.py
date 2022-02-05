@@ -26,7 +26,7 @@ module1 = Extension(module_name1,
                                'dependency/maxflow-v3.0/graph.cpp', 
                                'dependency/maxflow-v3.0/maxflow.cpp',
                                 maxflow_source],
-                    py_limited_api=False)
+                    py_limited_api=True)
 
 module_name2    = 'denseCRF'
 densecrf_source = "densecrf_python/wrap2D_py{0:}.cpp".format(py_version)
@@ -47,7 +47,7 @@ module2 = Extension(module_name2,
                             './dependency/densecrf/external/liblbfgs/lib/lbfgs.c', 
                             densecrf_source,
                             ],
-                    py_limited_api=False)
+                    py_limited_api=True)
 
 module_name3    = 'denseCRF3D'
 densecrf_source = "densecrf_python/wrap3D_py{0:}.cpp".format(py_version)
@@ -68,7 +68,7 @@ module3 = Extension(module_name3,
                             './dependency/densecrf/external/liblbfgs/lib/lbfgs.c', 
                             densecrf_source,
                             ],
-                    py_limited_api=False)
+                    py_limited_api=True)
 
 # Get the summary
 description = 'An open-source toolkit for conditional random field (CRF) and dense CRF'
@@ -95,12 +95,8 @@ setup(name=package_name,
       ext_modules = [module1, module2, module3],
       classifiers=[
             'License :: OSI Approved :: BSD License',
+            'Programming Language :: C++',
             'Programming Language :: Python :: 3 :: Only',
-            'Programming Language :: Python :: 3.6',
-            'Programming Language :: Python :: 3.7',
-            'Programming Language :: Python :: 3.8',
-            'Programming Language :: Python :: 3.9',
-            'Programming Language :: Python :: 3.10',
       ],
       python_requires = '>=3.6',
       cmdclass={'build_ext': build_ext},)
