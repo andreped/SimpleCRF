@@ -1,4 +1,4 @@
-name: Build and upload wheel (abi3)
+name: test wheel (abi3)
 
 # Only trigger, when the build workflow succeeded
 on:
