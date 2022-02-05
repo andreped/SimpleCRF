@@ -82,6 +82,8 @@ jobs:
     - name: Install deps for demos
       run: pip install SimpleITK pillow matplotlib
 
-    - name: Test maxflow demo
+    - name: Clone repo
       uses: actions/checkout@v1
+
+    - name: Test maxflow demo
       run: cd ${{github.workspace}}/examples && python demo_maxflow.py 0
