@@ -52,10 +52,9 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@master
       with:
-        ref: ${{ github.event.workflow_run.head_branch }}
-    - run: git branch
+        name: "Python wheel"
 
     # @TODO: not sure if this is allowed/possible. It is also ugly, but
     #  lets do this for now just for testing/debugging
