@@ -45,11 +45,3 @@ jobs:
         name: Python wheel
         path: ${{github.workspace}}/dist/SimpleCRF-*.whl
         if-no-files-found: error
-
-    # @TODO: not sure if this is allowed/possible. It is also ugly, but
-    #  lets do this for now just for testing/debugging
-    - uses: actions/checkout@v1
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.7
