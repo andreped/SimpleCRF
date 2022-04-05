@@ -33,7 +33,7 @@ elif sys.platform.startswith('darwin'):
     # set OSX Deploment Target to 10.13
     compile_args = ['-Xclang', '-mmacosx-version-min=10.13']
 
-
+# setup external modules (Cpp)
 module_name1   = 'maxflow'
 maxflow_source = "maxflow_python/wrap_py{0:}.cpp".format(py_version)
 module1 = Extension(module_name1,
@@ -112,7 +112,7 @@ setup(name=package_name,
       url      = 'https://github.com/andreped/SimpleCRF/tree/binaries',
       license  = 'BSD',
       packages = setuptools.find_packages(),
-      ext_modules = [module1, module2, module3],
+      ext_modules = [module2, module1, module3],
       classifiers=[
             'License :: OSI Approved :: BSD License',
             'Programming Language :: Python :: 3 :: Only',
