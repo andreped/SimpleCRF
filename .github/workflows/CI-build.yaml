@@ -47,11 +47,13 @@ jobs:
       run: cd ${{github.workspace}}/examples && python demo_densecrf.py 1
 
     - name: Test denseCRF 3D demo
-      run: cd ${{github.workspace}}/examples && python demo_densecrf.py 1
+      run: |
+        cd ${{github.workspace}}/examples && python demo_densecrf.py 1
+        ls
 
     - name: Upload Python wheel
       uses: actions/upload-artifact@v2
       with:
         name: Python wheel
-        path: ${{github.workspace}}/dist/SimpleCRF-*.whl
+        path: ${{github.workspace}}/dist/SimpleCRF-binaries-*.whl
         if-no-files-found: error
