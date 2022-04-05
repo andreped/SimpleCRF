@@ -30,6 +30,8 @@ jobs:
 
     - name: Install dependencies
       run: |
+        python3 -V
+        python -V
         pip3 install --upgrade pip
         pip3 install wheel setuptools future
         pip3 install -r requirements.txt
