@@ -1,10 +1,9 @@
 import os
+os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.13'  # 10.13, supports >= high-sierra
 import sys
 import setuptools
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
-
-os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.13'  # 10.13, supports >= high-sierra
 
 # get numpy as dependency when it is not pre-installed
 # from: https://stackoverflow.com/a/54128391/798093
@@ -31,7 +30,7 @@ elif sys.platform.startswith('darwin'):
     sys.argv.append('macosx_10_13_x86_64')
 
     # set OSX Deploment Target to 10.13
-    compile_args = ['-Xclang', '-mmacosx-version-min=10.13']
+    compile_args = []
 
 # setup external modules (Cpp)
 module_name1   = 'maxflow'

@@ -35,9 +35,9 @@ jobs:
         pip3 install -r requirements.txt
 
     - name: Build wheel
-      run: |
-        export MACOSX_DEPLOYMENT_TARGET=10.13
-        MACOSX_DEPLOYMENT_TARGET=10.13 python3 setup.py bdist_wheel
+      env:
+        MACOSX_DEPLOYMENT_TARGET: 10.13
+      run: MACOSX_DEPLOYMENT_TARGET=10.13 python3 setup.py bdist_wheel
 
     - name: Install software
       run: 
