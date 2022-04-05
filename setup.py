@@ -17,6 +17,12 @@ class build_ext(_build_ext):
 py_version   = sys.version[0]
 package_name = 'SimpleCRF-binaries'
 
+
+# Override platform tag for linux
+if platform.startswith('linux'):
+    sys.argv.append('--plat-name') 
+    sys.argv.append('manylinux1_x86_64')
+
 module_name1   = 'maxflow'
 maxflow_source = "maxflow_python/wrap_py{0:}.cpp".format(py_version)
 module1 = Extension(module_name1,
