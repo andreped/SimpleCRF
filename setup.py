@@ -17,9 +17,8 @@ class build_ext(_build_ext):
 py_version   = sys.version[0]
 package_name = 'SimpleCRF-binaries'
 
-
 # Override platform tag for linux
-if platform.startswith('linux'):
+if sys.platform.startswith('linux'):
     sys.argv.append('--plat-name') 
     sys.argv.append('manylinux1_x86_64')
 
