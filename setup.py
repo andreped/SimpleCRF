@@ -31,7 +31,7 @@ elif sys.platform.startswith('darwin'):
     sys.argv.append('macosx_10_13_x86_64')
 
     # set OSX Deploment Target to 10.13
-    #compile_args = ['-Xclang', '-mmacosx-version-min=10.13']
+    compile_args = ['-Xclang', '-mmacosx-version-min=10.13']
 
 # setup external modules (Cpp)
 module_name1   = 'maxflow'
