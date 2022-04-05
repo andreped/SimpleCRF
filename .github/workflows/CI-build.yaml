@@ -29,7 +29,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build wheel
-      run: python setup.py bdist_wheel
+      run: MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CCX=clang++ python setup.py bdist_wheel
 
     - name: Install software
       run: 
