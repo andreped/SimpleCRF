@@ -1,4 +1,6 @@
 # SimpleCRF
+**DISCLAIMER: This repository is a clone of the PyPI project [SimpleCRF](https://pypi.org/project/SimpleCRF/). This project contains the precompiled binaries relevant for installing SimpleCRF, which may be added into SimpleCRF in the future. This project might therefore be deprecated in the future.**
+
 Matlab and Python wrap of Conditional Random Field (CRF) and fully connected (dense) CRF for 2D and 3D image segmentation, according to the following papers:
 
 [1] Yuri Boykov and Vladimir Kolmogorov, "An experimental comparison of min-cut/max-flow algorithms for energy minimization in vision", IEEE TPAMI, 2004.
