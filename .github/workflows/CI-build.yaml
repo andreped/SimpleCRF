@@ -17,49 +17,40 @@ jobs:
         python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Setup pyenv for ${{ matrix.python-version }}
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-        MACOSX_DEPLOYMENT_TARGET: 10.13
-        PYTHON_CONFIGURE_OPTS: "--enable-framework"
-      uses: "gabrielfalcao/pyenv-action@v9"
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
       with:
-          default: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
-        ${{ matrix.python-version }} -V
-        python3 -V
-        python -V
-        pip3 install --upgrade pip
-        pip3 install wheel setuptools future
-        pip3 install -r requirements.txt
+        pip install wheel setuptools
+        pip install -r requirements.txt
 
     - name: Build wheel
-      env:
-        MACOSX_DEPLOYMENT_TARGET: 10.13
-      run: MACOSX_DEPLOYMENT_TARGET=10.13 python3 setup.py bdist_wheel
+      run: |
+        export MACOSX_DEPLOYMENT_TARGET=10.13
+        MACOSX_DEPLOYMENT_TARGET=10.13 CC=clang CCX=clang++ python setup.py bdist_wheel
 
     - name: Install software
       run: 
-        pip3 install --find-links=${{github.workspace}}/dist/ SimpleCRF_binaries
+        pip install --find-links=${{github.workspace}}/dist/ SimpleCRF_binaries
 
     - name: Test import
-      run: python3 -c "import denseCRF, maxflow"
+      run: python -c "import denseCRF, maxflow"
 
     - name: Install deps for demos
-      run: pip3 install SimpleITK pillow matplotlib
+      run: pip install SimpleITK pillow matplotlib
 
     - name: Test maxflow demo
-      run: cd ${{github.workspace}}/examples && python3 demo_maxflow.py 0
+      run: cd ${{github.workspace}}/examples && python demo_maxflow.py 0
 
     - name: Test denseCRF demo
-      run: cd ${{github.workspace}}/examples && python3 demo_densecrf.py 1
+      run: cd ${{github.workspace}}/examples && python demo_densecrf.py 1
 
     - name: Test denseCRF 3D demo
-      run: cd ${{github.workspace}}/examples && python3 demo_densecrf.py 1
+      run: cd ${{github.workspace}}/examples && python demo_densecrf.py 1
 
     - name: Upload Python wheel
       uses: actions/upload-artifact@v2
