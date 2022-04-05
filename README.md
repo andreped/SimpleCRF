@@ -18,7 +18,7 @@ This repository depends on the following packages:
 [`3D Dense CRF`](https://github.com/deepmedic/dense3dCrf)
 
 ### Installation
-1. Install by: [`pip install SimpleCRF`](https://github.com/taigw/SimpleCRF)
+1. Install by: [`pip install SimpleCRF-binaries`](https://github.com/taigw/SimpleCRF)
 
 2. Alternatively, you can compile the source files by the following two steps:
 ```bash
