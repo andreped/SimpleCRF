@@ -1,7 +1,10 @@
+import os
 import sys
 import setuptools
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext as _build_ext
+
+os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.13'  # 10.13, supports >= high-sierra
 
 # get numpy as dependency when it is not pre-installed
 # from: https://stackoverflow.com/a/54128391/798093
@@ -17,10 +20,19 @@ class build_ext(_build_ext):
 py_version   = sys.version[0]
 package_name = 'SimpleCRF-binaries'
 
-# Override platform tag for linux
+compile_args = []
 if sys.platform.startswith('linux'):
+    # Override platform tag for linux
     sys.argv.append('--plat-name') 
     sys.argv.append('manylinux1_x86_64')
+elif sys.platform.startswith('darwin'):
+    # Override platform tag, or it gets tag 10_15 for some reason
+    sys.argv.append('--plat-name')
+    sys.argv.append('macosx_10_13_x86_64')
+
+    # set OSX Deploment Target to 10.13
+    compile_args = ["-mmacosx-version-min=10.13"]
+
 
 module_name1   = 'maxflow'
 maxflow_source = "maxflow_python/wrap_py{0:}.cpp".format(py_version)
@@ -31,6 +43,7 @@ module1 = Extension(module_name1,
                                'dependency/maxflow-v3.0/graph.cpp', 
                                'dependency/maxflow-v3.0/maxflow.cpp',
                                 maxflow_source],
+                    extra_compile_args=compile_args,
                     py_limited_api=False)
 
 module_name2    = 'denseCRF'
@@ -52,6 +65,7 @@ module2 = Extension(module_name2,
                             './dependency/densecrf/external/liblbfgs/lib/lbfgs.c', 
                             densecrf_source,
                             ],
+                    extra_compile_args=compile_args,
                     py_limited_api=False)
 
 module_name3    = 'denseCRF3D'
@@ -73,6 +87,7 @@ module3 = Extension(module_name3,
                             './dependency/densecrf/external/liblbfgs/lib/lbfgs.c', 
                             densecrf_source,
                             ],
+                    extra_compile_args=compile_args,
                     py_limited_api=False)
 
 # Get the summary
