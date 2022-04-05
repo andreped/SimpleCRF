@@ -17,11 +17,14 @@ jobs:
         python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+    - name: Setup pyenv for ${{ matrix.python-version }}
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        MACOSX_DEPLOYMENT_TARGET: 10.13
+        PYTHON_CONFIGURE_OPTS: "--enable-framework"
+      uses: "gabrielfalcao/pyenv-action@v5"
       with:
-        python-version: ${{ matrix.python-version }}
+          default: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
