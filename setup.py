@@ -104,7 +104,7 @@ else:
 
 setup(name=package_name,
       version = "0.2.1.2",
-      author  ='Guotai Wang and André Pedersen',
+      author  ='Guotai Wang and Andre Pedersen',
       author_email = 'wguotai@gmail.com',
       description  = description,
       long_description = long_description,

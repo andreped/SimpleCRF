@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Setup pyenv for ${{ matrix.python-version }}
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: true
@@ -30,6 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        pip install --upgrade pip
         pip install wheel setuptools
         pip install -r requirements.txt
 
