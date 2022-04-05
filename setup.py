@@ -15,7 +15,7 @@ class build_ext(_build_ext):
         self.include_dirs.append(numpy.get_include())
 
 py_version   = sys.version[0]
-package_name = 'SimpleCRF'
+package_name = 'SimpleCRF-binaries'
 
 module_name1   = 'maxflow'
 maxflow_source = "maxflow_python/wrap_py{0:}.cpp".format(py_version)
@@ -84,12 +84,12 @@ else:
 
 setup(name=package_name,
       version = "0.2.1.1",
-      author  ='Guotai Wang',
+      author  ='Guotai Wang and André Pedersen',
       author_email = 'wguotai@gmail.com',
       description  = description,
       long_description = long_description,
       long_description_content_type = 'text/markdown',
-      url      = 'https://github.com/HiLab-git/SimpleCRF',
+      url      = 'https://github.com/andreped/SimpleCRF/tree/binaries',
       license  = 'BSD',
       packages = setuptools.find_packages(),
       ext_modules = [module1, module2, module3],
@@ -100,7 +100,6 @@ setup(name=package_name,
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
-            'Programming Language :: Python :: 3.10',
       ],
       python_requires = '>=3.6',
       cmdclass={'build_ext': build_ext},)
