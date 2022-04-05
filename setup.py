@@ -1,5 +1,5 @@
-import os
-os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.13'  # 10.13, supports >= high-sierra
+#import os
+#os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.13'  # 10.13, supports >= high-sierra
 import sys
 import setuptools
 from setuptools import setup, Extension
