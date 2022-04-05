@@ -88,7 +88,7 @@ else:
         long_description = f.read()
 
 setup(name=package_name,
-      version = "0.2.1.1",
+      version = "0.2.1.2",
       author  ='Guotai Wang and André Pedersen',
       author_email = 'wguotai@gmail.com',
       description  = description,
