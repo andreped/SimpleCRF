@@ -24,7 +24,7 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         MACOSX_DEPLOYMENT_TARGET: 10.13
         PYTHON_CONFIGURE_OPTS: "--enable-framework"
-      uses: "gabrielfalcao/pyenv-action@v5"
+      uses: "gabrielfalcao/pyenv-action@v9"
       with:
           default: ${{ matrix.python-version }}
 
