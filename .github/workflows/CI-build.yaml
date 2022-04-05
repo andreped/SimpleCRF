@@ -30,6 +30,7 @@ jobs:
 
     - name: Install dependencies
       run: |
+        ${{ matrix.python-version }} -V
         python3 -V
         python -V
         pip3 install --upgrade pip
