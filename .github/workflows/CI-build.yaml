@@ -13,7 +13,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2019, ubuntu-18.04, macos-10.15]
+        os: [ubuntu-18.04, macos-10.15]
         python-version: [3.6, 3.7, 3.8, 3.9]
 
     steps:
@@ -29,7 +29,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build wheel
-      run: MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CCX=clang++ python setup.py bdist_wheel
+      run: |
+        export MACOSX_DEPLOYMENT_TARGET=10.13
+        MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CCX=clang++ python setup.py bdist_wheel
 
     - name: Install software
       run: 
