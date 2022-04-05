@@ -30,9 +30,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install --upgrade pip
-        pip install wheel setuptools future
-        pip install -r requirements.txt
+        pip3 install --upgrade pip
+        pip3 install wheel setuptools future
+        pip3 install -r requirements.txt
 
     - name: Build wheel
       run: |
@@ -41,13 +41,13 @@ jobs:
 
     - name: Install software
       run: 
-        pip install --find-links=${{github.workspace}}/dist/ SimpleCRF_binaries
+        pip3 install --find-links=${{github.workspace}}/dist/ SimpleCRF_binaries
 
     - name: Test import
       run: python3 -c "import denseCRF, maxflow"
 
     - name: Install deps for demos
-      run: pip install SimpleITK pillow matplotlib
+      run: pip3 install SimpleITK pillow matplotlib
 
     - name: Test maxflow demo
       run: cd ${{github.workspace}}/examples && python3 demo_maxflow.py 0
